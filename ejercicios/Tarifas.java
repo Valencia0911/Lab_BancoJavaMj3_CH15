@@ -37,6 +37,36 @@
 
 public class Tarifas {
 
-    // Tu código aquí
+    public static final long COSTO_RETIRO_OTRO_BANCO=7_000;
+    public static final long COSTO_RETIRO_ADICIONAL=2_000;
+    public static final int RETIROS_GRATIS_AL_MES=3;
+    public static final long CUOTA_MANEJO= 12_900;
+    public static final long SALDO_SIN_CUOTA= 1_000_000;
 
+    public static long costoRetiro(boolean cajeroPropio, int numeroDeRetiro) {
+        if (numeroDeRetiro < 1) {
+            throw new IllegalArgumentException("EL numero de retiro no es valido");
+        }
+        if (!cajeroPropio) {    /*Al ser boleean se puede negar*/
+            return COSTO_RETIRO_OTRO_BANCO;
+        } else if (cajeroPropio && numeroDeRetiro<=RETIROS_GRATIS_AL_MES) {
+            return 0;
+        }else {
+            return COSTO_RETIRO_ADICIONAL;
+        }
+    }
+
+    public static long costoRetiro(boolean cajeroPropio){
+        return costoRetiro(cajeroPropio,1);
+    }
+    public static long cuotaManejo(long saldoPromedio){
+        if (saldoPromedio<0){
+            throw new IllegalArgumentException("El saldo no puede ser negativo");
+        }
+        if (saldoPromedio>=SALDO_SIN_CUOTA){
+            return 0;
+        }else{
+            return CUOTA_MANEJO;
+        }
+    }
 }

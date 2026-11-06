@@ -35,6 +35,40 @@
 
 public class Titular {
 
-    // Tu código aquí
+    private String nombre;
+    private String documento;
+    private String celular;
 
+    public void setCelular(String celular) {
+        if(celular==null||celular.length()!=10||!celular.startsWith("3")){
+            throw new IllegalArgumentException("El celular no es valido");
+        }
+        this.celular = celular;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getDocumento() {
+        return documento;
+    }
+
+    public String getCelular() {
+        return celular;
+    }
+
+    public Titular(String nombre, String documento) {
+        if(nombre== null || nombre.isBlank()){
+            throw new IllegalArgumentException("el nombre no es valido");
+        }
+        if(documento==null || documento.isBlank()){
+            throw new IllegalArgumentException("el documento no es valido");
+        }
+
+        this.nombre = nombre;
+        this.documento = documento;
+
+
+    }
 }

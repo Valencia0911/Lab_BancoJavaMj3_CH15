@@ -40,6 +40,55 @@
 
 public class CuentaAhorros {
 
-    // Tu código aquí
+    private String numero;
+    private Titular titular;
+    private long saldo=0;
+    private static int cuentasAbiertas;
 
+    public String getNumero() {
+        return numero;
+    }
+
+    public static int getCuentasAbiertas() {
+        return cuentasAbiertas;
+    }
+
+    public long getSaldo() {
+        return saldo;
+    }
+
+    public Titular getTitular() {
+        return titular;
+    }
+
+
+    public CuentaAhorros(String numero, Titular titular) {
+
+        if (numero==null || numero.isBlank()){
+            throw new IllegalArgumentException("EL numero no es valido");
+        }
+        if (titular==null){
+            throw new IllegalArgumentException("EL titular no es valido");
+        }
+        this.numero = numero;
+        this.titular = titular;
+        cuentasAbiertas++;
+    }
+
+    public void depositar(long valor){
+        if (valor<=0){
+            throw new IllegalArgumentException("Saldo insuficiente");
+        }
+        saldo=saldo+valor;
+    }
+
+    public void retirar(long valor){
+        if (valor<=0){
+            throw new IllegalArgumentException("Saldo insuficiente");
+        }
+        if (valor>this.saldo) {
+            throw new IllegalArgumentException("Saldo insuficiente. Saldo: $" + this.saldo + ", retiro: $" + valor);
+        }
+        saldo=saldo-valor;
+    }
 }
